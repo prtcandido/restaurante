@@ -4,27 +4,20 @@ namespace App\Http\Controllers;
 
 use App\Models\Restaurante;
 use Illuminate\Http\Request;
-
+use Illuminate\Support\Facades\Auth;
 class RestauranteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(Request $request)
+    {
+        $this->middleware('auth', [ 'except'=>['index'] ] );
+    }
     public function index()
     {
-        //
+        return 'entrou index';
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return 'entrou create'.Auth::user()->name;
     }
 
     /**
