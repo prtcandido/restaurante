@@ -9,8 +9,9 @@ class RestauranteController extends Controller
 {
     public function __construct(Request $request)
     {
-        $this->middleware('auth', [ 'except'=>['index'] ] );
+        $this->middleware('auth', [ 'except' => ['index'] ] );
     }
+
     public function index()
     {
         return 'entrou index';
