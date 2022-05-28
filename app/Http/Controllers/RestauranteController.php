@@ -18,7 +18,9 @@ class RestauranteController extends Controller
     }
     public function create()
     {
-        return 'entrou create'.Auth::user()->name;
+        //return 'entrou create'.Auth::user()->name;
+        $tipos = TipoRestaurante::all();
+        return View('restaurante.create')->with('tipos',$tipos);
     }
 
     /**
@@ -29,7 +31,11 @@ class RestauranteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $r = Restaurante::create( $request->all() );
+
+        //Associar restaurante ao tipo
+        $tipoid = $request->input('tipo');
+        $r->belongsToMany(TipoRestaurante::class)->attach($tipoid)
     }
 
     /**
@@ -40,7 +46,7 @@ class RestauranteController extends Controller
      */
     public function show(Restaurante $restaurante)
     {
-        //
+        return View('restaurante.show')->with('rest',$restaurante);
     }
 
     /**
