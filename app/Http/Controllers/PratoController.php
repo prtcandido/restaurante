@@ -14,7 +14,7 @@ class PratoController extends Controller
      */
     public function index()
     {
-        //
+        return View('prato.index')->with('pratos',Prato::all());
     }
 
     /**
@@ -24,7 +24,8 @@ class PratoController extends Controller
      */
     public function create()
     {
-        //
+        $rest = Restaurante::all();
+        return View ('prato.create')->with('rest',$rest);
     }
 
     /**
@@ -35,7 +36,7 @@ class PratoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Prato::create( $request->all() );
     }
 
     /**
@@ -57,7 +58,8 @@ class PratoController extends Controller
      */
     public function edit(Prato $prato)
     {
-        //
+        $rest = Restaurante::all();
+        return View ('prato.edit')->with('rest',$rest)->with('prato',$prato);
     }
 
     /**
