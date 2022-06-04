@@ -10,4 +10,8 @@ class Prato extends Model
     use HasFactory;
 
     protected $fillable = ['id','tipo','nome','preco','restaurante_id'];
+
+    public function restaurante(){
+    	return $this->belongsTo(Restaurante::class);
+    }
 }

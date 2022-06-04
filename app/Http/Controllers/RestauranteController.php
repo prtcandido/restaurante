@@ -7,10 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class RestauranteController extends Controller
 {
-    public function __construct(Request $request)
-    {
-        $this->middleware('auth', [ 'except' => ['index'] ] );
-    }
+    //public function __construct(Request $request)
+    //{
+    //    $this->middleware('auth', [ 'except' => ['index'] ] );
+    //}
 
     public function index()
     {
@@ -29,7 +29,9 @@ class RestauranteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($resquest,['cnpj'=>'required|max:10'],['cnpj.*'=>'Mensagem de erro']);
+
+        Restaurante::create( $request->all() );
     }
 
     /**
@@ -40,7 +42,9 @@ class RestauranteController extends Controller
      */
     public function show(Restaurante $restaurante)
     {
-        //
+        $pratos = $restaurante->pratos()->get();
+        $tipos = $restaurante->tipos()->get();
+        return View('restaurante.show')->with('restaurante',$restaurante)->with('pratos',$pratos)->with('tipos',$tipos);
     }
 
     /**
@@ -51,7 +55,7 @@ class RestauranteController extends Controller
      */
     public function edit(Restaurante $restaurante)
     {
-        //
+        return View('restaurante.edit')->with('restaurante',$restaurante);
     }
 
     /**
